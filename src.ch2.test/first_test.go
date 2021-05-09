@@ -1,5 +1,7 @@
-package main
+package try_test
 
-func main() {
-	$END$
+import "testing"
+
+func TestFirstTry(t *testing.T){
+	t.Log("My first try !")
 }
