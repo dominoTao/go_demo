@@ -35,3 +35,29 @@ func TestFn(t *testing.T) {
 	t.Log(tsSF(10))
 
 }
+
+
+func sum(ops ...int) int {
+	ret := 0
+	for _, op := range ops {
+		ret += op
+	}
+	return ret
+}
+
+func TestVarParam(t *testing.T) {
+	t.Log(sum(1,2,3,4))
+	t.Log(sum(1,2,3,4,5))
+}
+// defer 关键字  推迟执行
+func Clear() {
+	fmt.Println("clear resources.")
+}
+
+func TestDefer(t *testing.T) {
+	defer Clear()
+	fmt.Println("start ...")
+	time.Sleep(time.Second * 3)
+	panic("err")  // 报错
+	fmt.Println("end")
+}
