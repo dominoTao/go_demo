@@ -8,6 +8,31 @@ import (
 var LessThanTwoError = errors.New("n should be not less than 2")
 var LargerThenHundredError = errors.New("n should be not larger than 100")
 
+
+
+func init() {
+	fmt.Println("init 2")
+}
+func init() {
+	fmt.Println("init 1")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+func Square(n int)int {
+	return 1
+}
+
+
 func GetFibonacci(n int) ([]int, error) {
 	if n < 2 {
 		return nil, LessThanTwoError

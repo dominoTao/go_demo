@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+
+
 func TestPackage(t *testing.T) {
 	t.Log(series.GetFibonacci(5))
+	t.Log(series.Square(2)) // 访问包外的方法  必须首字母大写
+
 }
