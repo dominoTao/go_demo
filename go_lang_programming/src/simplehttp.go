@@ -9,12 +9,12 @@ import (
 )
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Println("Usage: ", os.Args[0], "host")
-		os.Exit(1)
-	}
-	service := os.Args[1]
-	//var service  = "www.baidu.com:80"
+	//if len(os.Args) != 2 {
+	//	fmt.Println("Usage: ", os.Args[0], "host")
+	//	os.Exit(1)
+	//}
+	//service := os.Args[1]
+	var service  = "www.baidu.com:80"
 
 	//conn, err := net.Dial("ip4:icmp", service)
 	//Fatal error : write ip4 192.168.0.119->110.242.68.4: wsasend: An attempt was made to access a socket in a way forbidden by its access permissions.
