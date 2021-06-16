@@ -1,41 +1,52 @@
 package main
 
 import (
-	"crypto/tls"
 	"fmt"
+	"github.com/gin-gonic/gin"
+	"io"
 	"net"
 	"net/http"
+	"net/url"
 	"os"
 	"testing"
 )
 
 func TestHttp(t *testing.T) {
-	//get, err := http.Get("https://www.iana.org/domains/reserved")
-	//if err != nil {
-	//	return
-	//}
-	//defer get.Body.Close()
-	//io.Copy(os.Stdout, get.Body)
 
-	//post, err := http.Post("http://example.com/upload", "image/jpeg", nil)
-	//if err != nil {
-	//	return
-	//}
-	//if post.StatusCode != http.StatusOK {
-	//	return
-	//}
-	//io.Copy(os.Stdout, post.Body)
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
-	//http.PostForm("http://examle.com/posts", url.Values{"title":{"article title"}, "content":{"article body"}})
+	get, err := http.Get("https://www.iana.org/domains/reserved")
+	if err != nil {
+		return
+	}
+	defer get.Body.Close()
+	io.Copy(os.Stdout, get.Body)
 
-	//http.Head("http://example.com/")
+	post, err := http.Post("http://example.com/upload", "image/jpeg", nil)
+	if err != nil {
+		return
+	}
+	if post.StatusCode != http.StatusOK {
+		return
+	}
+	io.Copy(os.Stdout, post.Body)
 
-	//req, _ := http.NewRequest("GET", "http://example.com", nil)
-	//req.Header.Add("User-Agent", "Gobook Custom User-Agent")
-	//client := &http.Client{}
-	//do, _ := client.Do(req)
-	//fmt.Println(do.Header)
+	http.PostForm("http://examle.com/posts", url.Values{"title":{"article title"}, "content":{"article body"}})
 
+	http.Head("http://example.com/")
+
+	req, _ := http.NewRequest("GET", "http://example.com", nil)
+	req.Header.Add("User-Agent", "Gobook Custom User-Agent")
+	client := &http.Client{}
+	do, _ := client.Do(req)
+	fmt.Println(do.Header)
+	//
 	//client := &http.Client{
 	//	CheckRedirect: redirectPolicyFunc,
 	//}
@@ -46,14 +57,16 @@ func TestHttp(t *testing.T) {
 	//req.Header.Add("If-None-Match", `W/"TheFileEtag"`)
 	//resp, _ := client.Do(req)
 	//fmt.Println(resp.Body)
+	////
+	//tr := &http.Transport{
+	//	TLSClientConfig:    &tls.Config{RootCAs: pool},
+	//	DisableCompression: true,
+	//}
+	//client := &http.Client{Transport: tr}
+	//resp, _ := client.Get("https://example.com")
+	//fmt.Println(resp.Body)
 
-	tr := &http.Transport{
-		TLSClientConfig:    &tls.Config{RootCAs: pool},
-		DisableCompression: true,
-	}
-	client := &http.Client{Transport: tr}
-	resp, _ := client.Get("https://example.com")
-	fmt.Println(resp.Body)
+
 }
 
 
